@@ -37,4 +37,35 @@ export class ExpensePrismaService {
 		});
 		return expenses;
 	}
+
+	async createExpense(expense) {
+		await this.prisma.expense.create({
+			data: {
+				amount: expense.amount,
+				comment: expense.comment,
+				purchasedOn: new Date(expense.purchasedOn),
+				updatedAt: new Date(),
+				nature: expense.nature,
+				distance: expense.distance || 0,
+				invites: expense.invites || 0,
+			},
+		});
+	}
+
+	async updateExpense(expenseId: number, expense) {
+		await this.prisma.expense.update({
+			data: {
+				amount: expense.amount,
+				comment: expense.comment,
+				purchasedOn: new Date(expense.purchasedOn),
+				updatedAt: new Date(),
+				nature: expense.nature,
+				distance: expense.distance || 0,
+				invites: expense.invites || 0,
+			},
+			where: {
+				id: expenseId,
+			},
+		});
+	}
 }

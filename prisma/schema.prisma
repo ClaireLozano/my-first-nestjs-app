@@ -20,5 +20,6 @@ model Expense {
   purchasedOn   DateTime @default(now())
   updatedAt     DateTime @updatedAt
   nature        String
-  distance      Int
+  distance      Int?
+  invites       Int?
 }
