@@ -9,4 +9,9 @@ export class ExpenseService {
 		const expenses = await this.expensePrismaService.getExpenses();
 		return expenses;
 	}
+
+	async getExpense(expenseId: number) {
+		const expenses = await this.expensePrismaService.getExpense(expenseId);
+		return expenses;
+	}
 }
