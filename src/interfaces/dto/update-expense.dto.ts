@@ -1,5 +1,4 @@
 export class UpdateExpenseDTO {
-	id: number;
 	amount: number;
 	comment: string;
 	purchasedOn: Date;

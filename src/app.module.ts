@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ExpenseModule } from './expense/expense.module';
+import { ExpenseModule } from './expense.module';
 
 @Module({
 	imports: [ExpenseModule],
