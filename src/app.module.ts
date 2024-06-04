@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ExpenseModule } from './expense.module';
-import { AuthModule } from './auth.module';
-import { UserModule } from './user.module';
+import { ExpenseModule } from './expense/expense.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
