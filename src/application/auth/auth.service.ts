@@ -1,26 +1,26 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { compare as bcryptCompare } from 'bcrypt';
-import { LoginDTO } from '../../interfaces/dto/login.dto';
+import { LoginInput } from '../../interfaces/controllers/auth/login.input';
 import { JwtService } from 'src/infrastructure/security/jwt.service';
-import { UserDomainService } from 'src/domain/user/user-domain.service';
 import { User } from 'src/domain/user/user.entity';
 import { UserPayload } from 'src/infrastructure/security/jwt.strategy';
+import { UserService } from 'src/domain/user/user.service';
 
 // Les services de l'application orchestrent les opérations sans inclure de logique métier.
 @Injectable()
 export class AuthService {
 	constructor(
-		private readonly userDomainService: UserDomainService,
+		private readonly userService: UserService,
 		private readonly jwtService: JwtService,
 	) {}
 
-	async login(loginDTO: LoginDTO): Promise<{ token: string }> {
-		const user = await this.userDomainService.GetUserByEmail(loginDTO.email);
+	async login(loginInput: LoginInput): Promise<{ token: string }> {
+		const user = await this.userService.GetUserByEmail(loginInput.email);
 		if (!user) {
 			throw new NotFoundException('user not found');
 		}
 
-		const isPasswordValid = await this.isPasswordValid(loginDTO.password, user.password);
+		const isPasswordValid = await this.isPasswordValid(loginInput.password, user.password);
 		if (!isPasswordValid) {
 			throw new UnauthorizedException('Invalid credentials');
 		}

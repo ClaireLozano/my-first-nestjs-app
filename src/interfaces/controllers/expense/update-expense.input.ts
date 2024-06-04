@@ -1,4 +1,4 @@
-export class UpdateExpenseDTO {
+export class UpdateExpenseInput {
 	amount: number;
 	comment: string;
 	purchasedOn: Date;

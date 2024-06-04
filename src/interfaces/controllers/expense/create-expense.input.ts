@@ -1,4 +1,4 @@
-export class CreateExpenseDTO {
+export class CreateExpenseInput {
 	amount: number;
 	comment: string;
 	nature: 'trip' | 'restaurant';
