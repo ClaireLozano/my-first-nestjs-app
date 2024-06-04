@@ -13,6 +13,10 @@ export class UserService {
 		return this.userDomainService.getUsers();
 	}
 
+	async getUserById(id: number): Promise<User> {
+		return this.userDomainService.GetUserById(id);
+	}
+
 	async register(registerDTO: RegisterDTO): Promise<User> {
 		const hashedPassword = await bcrypt.hash(registerDTO.password, 10);
 		const userEntity = new User(Math.random(), registerDTO.name, registerDTO.email, hashedPassword);

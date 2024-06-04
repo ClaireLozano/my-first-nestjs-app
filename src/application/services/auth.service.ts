@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { compare as bcryptCompare } from 'bcrypt';
 import { LoginDTO } from '../../interfaces/dto/login.dto';
-import { JwtService } from 'src/infrastructure/database/security/jwt.service';
+import { JwtService } from 'src/infrastructure/security/jwt.service';
 import { UserDomainService } from 'src/domain/user/user-domain.service';
 import { User } from 'src/domain/user/user.entity';
+import { UserPayload } from 'src/infrastructure/security/jwt.strategy';
 
 // Les services de l'application orchestrent les opérations sans inclure de logique métier.
 @Injectable()
@@ -23,7 +24,6 @@ export class AuthService {
 		if (!isPasswordValid) {
 			throw new UnauthorizedException('Invalid credentials');
 		}
-		console.log('user ok');
 
 		return this.authenticateUser(user);
 	}
@@ -33,7 +33,7 @@ export class AuthService {
 	}
 
 	private authenticateUser(user: User): { token: string } {
-		const payload = { id: user.id };
+		const payload: UserPayload = { id: user.id };
 		return {
 			token: this.jwtService.sign(payload),
 		};

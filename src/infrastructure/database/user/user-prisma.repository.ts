@@ -22,6 +22,14 @@ export class UserPrismaRepository implements UserRepository {
 		return new User(user.id, user.name, user.email, user.password);
 	}
 
+	async findById(id: number): Promise<User> {
+		const user = await this.prisma.user.findUnique({ where: { id } });
+		if (!user) {
+			throw new NotFoundException('User not found');
+		}
+		return new User(user.id, user.name, user.email);
+	}
+
 	async register(user: User): Promise<User> {
 		const createdUser = await this.prisma.user.create({
 			data: {

@@ -15,6 +15,10 @@ export class UserDomainService {
 		return await this.userRepository.register(userEntity);
 	}
 
+	async GetUserById(id: number): Promise<User> {
+		return await this.userRepository.findById(id);
+	}
+
 	async GetUserByEmail(email: string): Promise<User> {
 		return await this.userRepository.findByEmail(email);
 	}
