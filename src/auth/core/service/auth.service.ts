@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { compare as bcryptCompare } from 'bcrypt';
 import { LoginInput } from '../input/login.input';
-import { UserService } from '@domain/user';
 import { JwtService } from '../../adapter/security/jwt.service';
 import { UserPayload } from '../../adapter/security/jwt.strategy';
 import { User } from 'src/user/core/model/user.entity';
+import { UserService } from 'src/user/core/service/user.service';
 
 // Les services de l'application orchestrent les opérations sans inclure de logique métier.
 @Injectable()

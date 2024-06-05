@@ -3,6 +3,7 @@ import { ExpenseModule } from './expense/expense.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaService } from './database/prisma.service';
 
 @Module({
 	imports: [
@@ -15,6 +16,6 @@ import { ConfigModule } from '@nestjs/config';
 		UserModule,
 	],
 	controllers: [],
-	providers: [],
+	providers: [PrismaService],
 })
 export class AppModule {}

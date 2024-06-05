@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ExpenseRepository } from '../../core/expense-repository.interface';
 import { Expense as PrismaExpense } from '@prisma/client';
 import { Expense } from '../../core/model/expense.entity';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class ExpensePrismaRepository implements ExpenseRepository {
