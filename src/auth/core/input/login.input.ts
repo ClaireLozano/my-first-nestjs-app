@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 export class LoginInput {
 	@IsNotEmpty()
 	@IsString()
-	@MinLength(8, { message: 'your password should contains more than 8 chars' })
+	@MinLength(4, { message: 'your password should contains more than 4 chars' })
 	password: string;
 
 	@IsNotEmpty()
