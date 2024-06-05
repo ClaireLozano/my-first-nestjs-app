@@ -15,7 +15,7 @@ export class AuthService {
 	) {}
 
 	async login(loginInput: LoginInput): Promise<{ token: string }> {
-		const user = await this.userService.GetUserByEmail(loginInput.email);
+		const user = await this.userService.getUserByEmail(loginInput.email);
 		if (!user) {
 			throw new NotFoundException('user not found');
 		}
@@ -32,9 +32,11 @@ export class AuthService {
 		return await bcryptCompare(password, hashedPassword);
 	}
 
-	private authenticateUser(user: User): { token: string } {
+	private authenticateUser(user: User): { token: string; user: Omit<User, 'password'> } {
 		const payload: UserPayload = { id: user.id };
+		const { password, ...userWithoutPassword } = user;
 		return {
+			user: userWithoutPassword,
 			token: this.jwtService.sign(payload),
 		};
 	}
